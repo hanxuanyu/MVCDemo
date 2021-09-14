@@ -1,3 +1,5 @@
+package test.dao;
+
 import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.dao.ClerkDao;
 import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
@@ -22,7 +24,7 @@ public class TestClerk {
     @Test
     public void testGetClerk() {
         ClerkDao clerkDao = new ClerkDaoImpl();
-        System.out.println(clerkDao.getClerkById("1"));
+        System.out.println(clerkDao.getClerkById(1));
     }
 
     @Test
@@ -44,14 +46,14 @@ public class TestClerk {
     @Test
     public void testDeleteClerk() {
         ClerkDao clerkDao = new ClerkDaoImpl();
-        int i = clerkDao.deleteClerk(5);
+        int i = clerkDao.deleteClerk(1);
         System.out.println(i);
     }
 
     @Test
     public void testUpdateClerk() {
         ClerkDao clerkDao = new ClerkDaoImpl();
-        int result = clerkDao.updateClerk(new Clerk(6, "hxy", 0, "123456", 0, "123456"));
+        int result = clerkDao.updateClerk(new Clerk(1, "hxy", 0, "123456", 0, "123456"));
         System.out.println(result);
     }
 }

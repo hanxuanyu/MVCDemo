@@ -22,7 +22,7 @@ public interface CommodityDao extends BaseDao {
      * @param id 商品id
      * @return 商品对象
      */
-    Commodity getCommodityById(String id);
+    Commodity getCommodityById(int id);
 
     /**
      * 增加店员

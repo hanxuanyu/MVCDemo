@@ -24,7 +24,7 @@ public class ClerkDaoImpl extends BaseDaoImpl implements ClerkDao {
         return null;
     }
 
-    public Clerk getClerkById(String id) {
+    public Clerk getClerkById(int id) {
         String sql = "SELECT id id, clerk_name clerkName, gender, phone, admin, passwd FROM `clerk` WHERE `id` = ?";
         return getInstance(Clerk.class, sql, id);
     }
@@ -50,5 +50,10 @@ public class ClerkDaoImpl extends BaseDaoImpl implements ClerkDao {
                 clerk.getPasswd(),
                 clerk.getId()
         );
+    }
+
+    public Clerk getClerkByName(String name) {
+        String sql = "SELECT id id, clerk_name clerkName, gender, phone, admin, passwd FROM `clerk` WHERE `clerk_name` = ?";
+        return getInstance(Clerk.class, sql, name);
     }
 }

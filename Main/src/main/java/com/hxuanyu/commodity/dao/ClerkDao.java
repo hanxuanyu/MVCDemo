@@ -22,7 +22,7 @@ public interface ClerkDao extends BaseDao {
      * @param id 店员id
      * @return 店员对象
      */
-    Clerk getClerkById(String id);
+    Clerk getClerkById(int id);
 
     /**
      * 增加店员
@@ -48,5 +48,12 @@ public interface ClerkDao extends BaseDao {
      */
     int updateClerk(Clerk clerk);
 
+    /**
+     * 通过用户名获取用户
+     *
+     * @param name 用户名
+     * @return 用户对象
+     */
+    Clerk getClerkByName(String name);
 
 }
