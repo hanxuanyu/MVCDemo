@@ -54,7 +54,7 @@ public class BaseDaoImpl implements BaseDao {
     public <T> T getInstance(Class<T> clazz, String sql, Object... args) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection conn = null;
+        Connection conn;
         try {
             conn = JdbcUtils.getConnection();
             ps = conn.prepareStatement(sql);
