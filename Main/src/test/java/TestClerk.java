@@ -1,14 +1,8 @@
 import com.hxuanyu.commodity.beans.Clerk;
-import com.hxuanyu.commodity.dao.BaseDao;
 import com.hxuanyu.commodity.dao.ClerkDao;
-import com.hxuanyu.commodity.dao.impl.BaseDaoImpl;
 import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
-import com.hxuanyu.commodity.service.ClerkService;
-import com.hxuanyu.commodity.service.impl.ClerkServiceImpl;
 import com.hxuanyu.commodity.utils.JdbcUtils;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -18,7 +12,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
-public class TestClerkDao {
+public class TestClerk {
 
     @Test
     public void testConnection() throws Exception {
