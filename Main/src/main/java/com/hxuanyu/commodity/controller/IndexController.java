@@ -1,19 +1,15 @@
 package com.hxuanyu.commodity.controller;
 
-import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.beans.Msg;
 import com.hxuanyu.commodity.enums.StatusCode;
 import com.hxuanyu.commodity.service.ClerkService;
-import com.hxuanyu.commodity.utils.Constant;
 import com.hxuanyu.commodity.utils.MsgUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
@@ -34,10 +30,8 @@ public class IndexController {
     }
 
     @RequestMapping({"/", "/index"})
-    public String index(HttpSession session) {
-        Object userObj = session.getAttribute("clerk_obj");
-        logger.debug("user:" + userObj);
-        return "index";
+    public String index() {
+        return "redirect:/commodity";
     }
 
     @RequestMapping("/login")
@@ -47,7 +41,7 @@ public class IndexController {
 
     @ResponseBody
     @PostMapping(value = "/doLogin", produces = "application/json")
-    public Msg doLogin(@RequestBody HashMap<String, String> map, HttpSession session, Model model) {
+    public Msg doLogin(@RequestBody HashMap<String, String> map) {
         if (map == null) {
             return MsgUtil.errorMsg("参数错误");
         }

@@ -40,7 +40,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //如果是ajax请求响应头会有x-requested-with
         if (request.getHeader(Constant.AJAX_HTTP_HEADER_KEY) != null && Constant.AJAX_HTTP_HEADER_VALUE.equalsIgnoreCase(request.getHeader(Constant.AJAX_HTTP_HEADER_KEY))) {
             logger.debug("检测到ajax请求");
-            if (session != null && session.getAttribute(Constant.SESSION_UID_KEY) == null) {
+            if (session != null && session.getAttribute(Constant.SESSION_CLERK) == null) {
                 logger.debug("未登录，返回错误信息");
                 response.addHeader("Content-Type", "application/json;charset=UTF-8");
                 PrintWriter out = response.getWriter();
@@ -52,7 +52,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             logger.debug("检测到普通请求");
             //非ajax请求时，session失效的处理
             if (session != null) {
-                Object object = session.getAttribute(Constant.SESSION_UID_KEY);
+                Object object = session.getAttribute(Constant.SESSION_CLERK);
                 if (object == null) {
                     logger.debug("未登录，重定向到登录页面");
                     response.sendRedirect(request.getContextPath() + "/login");

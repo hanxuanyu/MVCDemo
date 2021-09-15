@@ -76,7 +76,8 @@ public class ClerkServiceImpl implements ClerkService {
         }
         String uid = MsgUtil.generateUid(clerk);
         logger.debug("生成uid：" + uid);
-        session.setAttribute(Constant.SESSION_UID_KEY, uid);
+        clerk.setPasswd("");
+        session.setAttribute(Constant.SESSION_CLERK, clerk);
         return StatusCode.SUCCESS;
     }
 
