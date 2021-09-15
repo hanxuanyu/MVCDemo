@@ -1,6 +1,5 @@
 package com.hxuanyu.commodity.dao;
 
-import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.beans.Commodity;
 
 import java.util.List;

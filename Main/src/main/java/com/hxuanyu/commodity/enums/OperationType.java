@@ -22,7 +22,24 @@ public enum OperationType {
         this.operationValue = operationValue;
     }
 
-    public int getOperationValue() {
+    public int value() {
         return operationValue;
+    }
+
+
+    /**
+     * 判断value是否在枚举类型的定义之内
+     *
+     * @param value 要判断的类型，int
+     * @return 如果在返回true，不在返回false
+     */
+    public static boolean containsValue(int value) {
+        OperationType[] values = OperationType.values();
+        for (OperationType operationType : values) {
+            if (operationType.value() == value) {
+                return true;
+            }
+        }
+        return false;
     }
 }

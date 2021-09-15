@@ -14,7 +14,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
-public class TestClerk {
+public class TestClerkDao {
 
     @Test
     public void testConnection() throws Exception {

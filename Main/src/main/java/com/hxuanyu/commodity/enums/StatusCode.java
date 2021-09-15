@@ -39,7 +39,14 @@ public enum StatusCode {
      * 商品不存在
      */
     COMMODITY_NOT_EXISTS("商品不存在"),
-    ;
+    /**
+     * 商品名为空
+     */
+    COMMODITY_NAME_EMPTY("商品名为空"),
+    /**
+     * 操作类型不符合要求
+     */
+    OPERATION_TYPE_ERROR("操作类型不符合要求");
 
 
     private final String statusName;

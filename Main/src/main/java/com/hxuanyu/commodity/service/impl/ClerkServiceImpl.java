@@ -8,6 +8,7 @@ import com.hxuanyu.commodity.service.ClerkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class ClerkServiceImpl implements ClerkService {
         if (allClerk != null && allClerk.size() > 0) {
             return allClerk;
         }
-        return null;
+        return new ArrayList<Clerk>();
     }
 
     public Clerk getClerkById(int id) {

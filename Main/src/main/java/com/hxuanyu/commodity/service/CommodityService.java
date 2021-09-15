@@ -1,7 +1,6 @@
 package com.hxuanyu.commodity.service;
 
 import com.hxuanyu.commodity.beans.Commodity;
-import com.hxuanyu.commodity.dao.CommodityDao;
 import com.hxuanyu.commodity.enums.StatusCode;
 import org.springframework.stereotype.Service;
 
@@ -46,4 +45,13 @@ public interface CommodityService {
      * @return 状态码
      */
     StatusCode updateCommodity(Commodity commodity);
+
+    /**
+     * 删除商品
+     * @param id 要删除的商品id
+     * @return 状态码
+     */
+    StatusCode deleteCommodity(int id);
+
+
 }
