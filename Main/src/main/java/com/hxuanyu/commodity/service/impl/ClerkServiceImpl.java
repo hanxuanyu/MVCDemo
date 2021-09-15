@@ -2,12 +2,16 @@ package com.hxuanyu.commodity.service.impl;
 
 import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.dao.ClerkDao;
-import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
 import com.hxuanyu.commodity.enums.StatusCode;
 import com.hxuanyu.commodity.service.ClerkService;
+import com.hxuanyu.commodity.utils.Constant;
+import com.hxuanyu.commodity.utils.MsgUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +25,19 @@ import java.util.List;
 @Service
 public class ClerkServiceImpl implements ClerkService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClerkServiceImpl.class);
+
     ClerkDao clerkDao;
+    private HttpSession session;
 
     @Autowired
-    public ClerkServiceImpl(ClerkDaoImpl clerkDao) {
+    public void setClerkDao(ClerkDao clerkDao) {
         this.clerkDao = clerkDao;
+    }
+
+    @Autowired
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 
     @Override
@@ -62,6 +74,9 @@ public class ClerkServiceImpl implements ClerkService {
         if (!clerk.getPasswd().equals(passwd)) {
             return StatusCode.CLERK_PASSWORD_WRONG;
         }
+        String uid = MsgUtil.generateUid(clerk);
+        logger.debug("生成uid：" + uid);
+        session.setAttribute(Constant.SESSION_UID_KEY, uid);
         return StatusCode.SUCCESS;
     }
 

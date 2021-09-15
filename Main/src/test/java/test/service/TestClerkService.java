@@ -1,9 +1,7 @@
 package test.service;
 
 import com.hxuanyu.commodity.beans.Clerk;
-import com.hxuanyu.commodity.dao.ClerkDao;
 import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
-import com.hxuanyu.commodity.service.ClerkService;
 import com.hxuanyu.commodity.service.impl.ClerkServiceImpl;
 import org.junit.Test;
 
@@ -16,7 +14,11 @@ import java.util.List;
  * @version 1.0
  */
 public class TestClerkService {
-    ClerkService clerkService = new ClerkServiceImpl(new ClerkDaoImpl());
+    ClerkServiceImpl clerkService = new ClerkServiceImpl();
+
+    {
+        clerkService.setClerkDao(new ClerkDaoImpl());
+    }
 
     @Test
     public void testGetAllClerk() {

@@ -1,5 +1,6 @@
 package com.hxuanyu.commodity.controller;
 
+import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.beans.Msg;
 import com.hxuanyu.commodity.enums.StatusCode;
 import com.hxuanyu.commodity.service.ClerkService;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +34,9 @@ public class IndexController {
     }
 
     @RequestMapping({"/", "/index"})
-    public String index() {
+    public String index(HttpSession session) {
+        Object userObj = session.getAttribute("clerk_obj");
+        logger.debug("user:" + userObj);
         return "index";
     }
 
@@ -43,7 +47,7 @@ public class IndexController {
 
     @ResponseBody
     @PostMapping(value = "/doLogin", produces = "application/json")
-    public Msg doLogin(@RequestBody HashMap<String, String> map, HttpSession session) {
+    public Msg doLogin(@RequestBody HashMap<String, String> map, HttpSession session, Model model) {
         if (map == null) {
             return MsgUtil.errorMsg("参数错误");
         }
@@ -52,7 +56,6 @@ public class IndexController {
         logger.debug("username: " + username + " password: " + password);
         StatusCode statusCode = clerkService.checkLogin(username, password);
         if (statusCode.equals(StatusCode.SUCCESS)) {
-            session.setAttribute(Constant.SESSION_KEY, username);
             return MsgUtil.successMsg("登陆成功");
         } else {
             return MsgUtil.errorMsg(statusCode.toString());

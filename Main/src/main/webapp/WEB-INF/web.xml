@@ -29,6 +29,10 @@
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--request监听-->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
     <!--前端处理器-->
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
