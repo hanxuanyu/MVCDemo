@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository
 public class ClerkDaoImpl extends BaseDaoImpl implements ClerkDao {
+    @Override
     public List<Clerk> getAllClerk() {
         String sql = "SELECT id, clerk_name clerkName, gender, phone, admin, passwd FROM `clerk`";
         List<Clerk> clerkList = getInstanceList(Clerk.class, sql);
@@ -24,21 +25,25 @@ public class ClerkDaoImpl extends BaseDaoImpl implements ClerkDao {
         return null;
     }
 
+    @Override
     public Clerk getClerkById(int id) {
         String sql = "SELECT id id, clerk_name clerkName, gender, phone, admin, passwd FROM `clerk` WHERE `id` = ?";
         return getInstance(Clerk.class, sql, id);
     }
 
+    @Override
     public int addClerk(Clerk clerk) {
         String sql = "INSERT INTO clerk (clerk_name, gender, phone, admin, passwd) VALUES (?, ?, ?, ?, ?)";
         return update(sql, clerk.getClerkName(), clerk.getGender(), clerk.getPhone(), clerk.getAdmin(), clerk.getPasswd());
     }
 
+    @Override
     public int deleteClerk(int id) {
         String sql = "delete from clerk where id = ?";
         return update(sql, id);
     }
 
+    @Override
     public int updateClerk(Clerk clerk) {
         String sql = "update clerk set clerk_name = ?, gender = ?, phone = ?, admin = ?, passwd = ? where id = ?";
         return update(
@@ -52,6 +57,7 @@ public class ClerkDaoImpl extends BaseDaoImpl implements ClerkDao {
         );
     }
 
+    @Override
     public Clerk getClerkByName(String name) {
         String sql = "SELECT id id, clerk_name clerkName, gender, phone, admin, passwd FROM `clerk` WHERE `clerk_name` = ?";
         return getInstance(Clerk.class, sql, name);

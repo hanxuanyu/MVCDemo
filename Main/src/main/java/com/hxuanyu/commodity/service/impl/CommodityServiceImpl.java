@@ -26,18 +26,21 @@ public class CommodityServiceImpl implements CommodityService {
         this.commodityDao = commodityDao;
     }
 
+    @Override
     public List<Commodity> getAllCommodity() {
         List<Commodity> commodityList = commodityDao.getAllCommodity();
         if (commodityList != null) {
             return commodityList;
         }
-        return new ArrayList<Commodity>();
+        return new ArrayList<>();
     }
 
+    @Override
     public Commodity getCommodityById(int id) {
         return commodityDao.getCommodityById(id);
     }
 
+    @Override
     public StatusCode addCommodity(Commodity commodity) {
         if (commodity.getCommodityName() == null || commodity.getCommodityName().length() == 0) {
             return StatusCode.COMMODITY_NAME_EMPTY;
@@ -49,6 +52,7 @@ public class CommodityServiceImpl implements CommodityService {
         return StatusCode.FAILED;
     }
 
+    @Override
     public StatusCode updateCommodity(Commodity commodity) {
         if (commodity.getCommodityName() == null || commodity.getCommodityName().length() == 0) {
             return StatusCode.COMMODITY_NAME_EMPTY;
@@ -64,6 +68,7 @@ public class CommodityServiceImpl implements CommodityService {
         return StatusCode.FAILED;
     }
 
+    @Override
     public StatusCode deleteCommodity(int id) {
         Commodity temp = getCommodityById(id);
         if (temp == null) {

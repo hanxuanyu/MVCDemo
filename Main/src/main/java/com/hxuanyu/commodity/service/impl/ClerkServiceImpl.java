@@ -28,22 +28,26 @@ public class ClerkServiceImpl implements ClerkService {
         this.clerkDao = clerkDao;
     }
 
+    @Override
     public List<Clerk> getAllClerk() {
         List<Clerk> allClerk = clerkDao.getAllClerk();
         if (allClerk != null && allClerk.size() > 0) {
             return allClerk;
         }
-        return new ArrayList<Clerk>();
+        return new ArrayList<>();
     }
 
+    @Override
     public Clerk getClerkById(int id) {
         return clerkDao.getClerkById(id);
     }
 
+    @Override
     public Clerk getClerkByName(String name) {
         return clerkDao.getClerkByName(name);
     }
 
+    @Override
     public StatusCode checkLogin(String clerkName, String passwd) {
         if (clerkName == null || clerkName.length() == 0) {
             return StatusCode.CLERK_NAME_EMPTY;
@@ -61,6 +65,7 @@ public class ClerkServiceImpl implements ClerkService {
         return StatusCode.SUCCESS;
     }
 
+    @Override
     public StatusCode addClerk(Clerk clerk) {
         if (clerk.getClerkName() == null || clerk.getClerkName().length() == 0) {
             return StatusCode.CLERK_NAME_EMPTY;
@@ -79,6 +84,7 @@ public class ClerkServiceImpl implements ClerkService {
         return StatusCode.FAILED;
     }
 
+    @Override
     public StatusCode updateClerk(Clerk clerk) {
         if (clerk.getClerkName() == null || clerk.getClerkName().length() == 0) {
             return StatusCode.CLERK_NAME_EMPTY;
@@ -98,6 +104,7 @@ public class ClerkServiceImpl implements ClerkService {
         return StatusCode.FAILED;
     }
 
+    @Override
     public StatusCode deleteClerkById(int id) {
         Clerk temp = clerkDao.getClerkById(id);
         if (temp == null) {
@@ -110,6 +117,7 @@ public class ClerkServiceImpl implements ClerkService {
         return StatusCode.FAILED;
     }
 
+    @Override
     public StatusCode deleteClerkByName(String name) {
         if (name == null || name.length() == 0) {
             return StatusCode.CLERK_NAME_EMPTY;
@@ -124,4 +132,6 @@ public class ClerkServiceImpl implements ClerkService {
         }
         return StatusCode.FAILED;
     }
+
+
 }

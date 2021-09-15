@@ -39,7 +39,7 @@ public class TestOperationDao {
                 1,
                 2,
                 new Date(System.currentTimeMillis()),
-                OperationType.ADD.value()
+                OperationType.ADD_COMMODITY
         ));
         System.out.println(result);
     }

@@ -8,13 +8,17 @@ package com.hxuanyu.commodity.enums;
  */
 public enum OperationType {
     /**
-     * ADD：增加/上架
-     * DELETE：删除/下架
-     * UPDATE：修改
+     * 增加商品
      */
-    ADD(0),
-    DELETE(1),
-    UPDATE(2);
+    ADD_COMMODITY(1),
+    /**
+     * 删除商品
+     */
+    DELETE_COMMODITY(2),
+    /**
+     * 修改商品
+     */
+    UPDATE_COMMODITY(3);
 
     private final int operationValue;
 

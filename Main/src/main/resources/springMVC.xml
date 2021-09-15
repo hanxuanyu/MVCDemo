@@ -26,8 +26,40 @@
             </bean>
         </property>
     </bean>
-    <!--首页控制器-->
-    <mvc:view-controller path="/" view-name="index"/>
+    <!--登录拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--排除登录请求-->
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/doLogin"/>
+            <!--排除静态资源-->
+            <mvc:exclude-mapping path="/static/images/**"/>
+            <mvc:exclude-mapping path="/static/css/**"/>
+            <mvc:exclude-mapping path="/static/fonts/**"/>
+            <mvc:exclude-mapping path="/static/js/**"/>
+            <ref bean="loginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!--自定义json转换器-->
+    <mvc:annotation-driven>
+
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <!-- 自定义Jackson的objectMapper -->
+                <property name="objectMapper" ref="customObjectMapper"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+
+    <bean name="customObjectMapper" class="com.hxuanyu.commodity.utils.CustomObjectMapper"/>
     <!--处理静态资源-->
     <mvc:default-servlet-handler/>
     <!--开启MVC的注解驱动-->

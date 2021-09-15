@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Repository
 public class CommodityDaoImpl extends BaseDaoImpl implements CommodityDao {
+    @Override
     public List<Commodity> getAllCommodity() {
         String sql = "select id, commodity_name commodityName, origin, production_date productionDate, shelf_life shelfLife from commodity";
         List<Commodity> commodityList = getInstanceList(Commodity.class, sql);
@@ -23,21 +24,25 @@ public class CommodityDaoImpl extends BaseDaoImpl implements CommodityDao {
         return null;
     }
 
+    @Override
     public Commodity getCommodityById(int id) {
         String sql = "select id, commodity_name commodityName, origin, production_date productionDate, shelf_life shelfLife from commodity where id = ?";
         return getInstance(Commodity.class, sql, id);
     }
 
+    @Override
     public int addCommodity(Commodity commodity) {
         String sql = "insert into commodity(commodity_name, origin, production_date, shelf_life) values(?, ?, ?, ?)";
         return update(sql, commodity.getCommodityName(), commodity.getOrigin(), commodity.getProductionDate(), commodity.getShelfLife());
     }
 
+    @Override
     public int deleteCommodity(int id) {
         String sql = "delete from commodity where id = ?";
         return update(sql, id);
     }
 
+    @Override
     public int updateCommodity(Commodity commodity) {
         String sql = "update commodity set commodity_name = ?, origin = ?, production_date = ?, shelf_life = ? where id = ?";
         return update(

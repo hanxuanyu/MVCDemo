@@ -1,7 +1,6 @@
 package com.hxuanyu.commodity.dao;
 
 import com.hxuanyu.commodity.beans.Clerk;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

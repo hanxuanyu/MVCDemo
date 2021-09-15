@@ -28,18 +28,21 @@ public class OperationServiceImpl implements OperationService {
         this.operationDao = operationDao;
     }
 
+    @Override
     public List<Operation> getAllOperation() {
         List<Operation> operationList = operationDao.getAllOperation();
         if (operationList != null) {
             return operationList;
         }
-        return new ArrayList<Operation>();
+        return new ArrayList<>();
     }
 
+    @Override
     public Operation getOperationById(int id) {
         return operationDao.getOperationById(id);
     }
 
+    @Override
     public StatusCode addOperation(Operation operation) {
         int operationType = operation.getOperationType();
         if (!OperationType.containsValue(operationType)) {
@@ -48,8 +51,10 @@ public class OperationServiceImpl implements OperationService {
         if (operation.getOperationTime() == null) {
             operation.setOperationTime(new Date(System.currentTimeMillis()));
         }
-        operationDao.addOperation(operation);
-
-        return null;
+        int result = operationDao.addOperation(operation);
+        if (result == 1) {
+            return StatusCode.SUCCESS;
+        }
+        return StatusCode.FAILED;
     }
 }

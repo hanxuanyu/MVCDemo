@@ -1,7 +1,18 @@
 package com.hxuanyu.commodity.controller;
 
+import com.hxuanyu.commodity.beans.Msg;
+import com.hxuanyu.commodity.enums.StatusCode;
+import com.hxuanyu.commodity.service.ClerkService;
+import com.hxuanyu.commodity.utils.Constant;
+import com.hxuanyu.commodity.utils.MsgUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 /**
  * 首页控制器：验证用户信息并设置cookie
@@ -12,8 +23,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/")
+    private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+    ClerkService clerkService;
+
+    @Autowired
+    public void setClerkService(ClerkService clerkService) {
+        this.clerkService = clerkService;
+    }
+
+    @RequestMapping({"/", "/index"})
     public String index() {
         return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/doLogin", produces = "application/json")
+    public Msg doLogin(@RequestBody HashMap<String, String> map, HttpSession session) {
+        if (map == null) {
+            return MsgUtil.errorMsg("参数错误");
+        }
+        String username = map.get("username");
+        String password = map.get("password");
+        logger.debug("username: " + username + " password: " + password);
+        StatusCode statusCode = clerkService.checkLogin(username, password);
+        if (statusCode.equals(StatusCode.SUCCESS)) {
+            session.setAttribute(Constant.SESSION_KEY, username);
+            return MsgUtil.successMsg("登陆成功");
+        } else {
+            return MsgUtil.errorMsg(statusCode.toString());
+        }
     }
 }

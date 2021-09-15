@@ -1,5 +1,7 @@
 package com.hxuanyu.commodity.beans;
 
+import com.hxuanyu.commodity.enums.OperationType;
+
 import java.util.Date;
 
 /**
@@ -19,11 +21,15 @@ public class Operation {
 
     }
 
-    public Operation(int userId, int commodityId, Date operationTime, int operationType) {
+    public Operation(int userId, int commodityId, OperationType operationType) {
         this.userId = userId;
         this.commodityId = commodityId;
+        this.operationType = operationType.value();
+    }
+
+    public Operation(int userId, int commodityId, Date operationTime, OperationType operationType) {
+        this(userId, commodityId, operationType);
         this.operationTime = operationTime;
-        this.operationType = operationType;
     }
 
     @Override

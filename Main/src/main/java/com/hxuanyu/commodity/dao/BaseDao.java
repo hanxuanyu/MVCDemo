@@ -1,7 +1,6 @@
 package com.hxuanyu.commodity.dao;
 
 
-import java.sql.Connection;
 import java.util.List;
 
 /**

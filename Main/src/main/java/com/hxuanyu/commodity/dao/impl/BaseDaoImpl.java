@@ -24,6 +24,7 @@ public class BaseDaoImpl implements BaseDao {
      * @return int 受影响的行数
      * @author hxuanyu
      */
+    @Override
     public int update(String sql, Object... args) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -51,6 +52,7 @@ public class BaseDaoImpl implements BaseDao {
      * @return T Bean对象
      * @author hxuanyu
      */
+    @Override
     public <T> T getInstance(Class<T> clazz, String sql, Object... args) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -92,6 +94,7 @@ public class BaseDaoImpl implements BaseDao {
      * @return T Bean对象
      * @author hxuanyu
      */
+    @Override
     public <T> List<T> getInstanceList(Class<T> clazz, String sql, Object... args) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -105,7 +108,7 @@ public class BaseDaoImpl implements BaseDao {
             rs = ps.executeQuery();
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-            List<T> list = new ArrayList<T>();
+            List<T> list = new ArrayList<>();
             while (rs.next()) {
                 T t = clazz.newInstance();
                 for (int i = 0; i < columnCount; i++) {

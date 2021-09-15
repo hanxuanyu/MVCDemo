@@ -1,8 +1,6 @@
 package com.hxuanyu.commodity.utils;
 
-import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
 
 /**
  * JDBC工具类，用于完成获取连接、关闭连接等操作
@@ -10,6 +8,7 @@ import java.util.Properties;
  * @author hanxuanyu
  * @version 1.0
  */
+@SuppressWarnings("DuplicatedCode")
 public class JdbcUtils {
 
     /**
@@ -21,13 +20,10 @@ public class JdbcUtils {
      */
     public static Connection getConnection() throws Exception {
         // 1. 读取配置
-        InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("jdbc.properties");
-        Properties pros = new Properties();
-        pros.load(is);
-        String user = pros.getProperty("user");
-        String password = pros.getProperty("password");
-        String url = pros.getProperty("url");
-        String driverClass = pros.getProperty("driverClass");
+        String user ="root";
+        String password = "abcabc..123";
+        String url = "jdbc:mysql://192.168.73.100:3306/mvc_demo?rewriteBatchedStatements=true";
+        String driverClass = "com.mysql.jdbc.Driver";
 
         // 2. 加载驱动
         Class.forName(driverClass);
