@@ -112,7 +112,9 @@ public class ClerkServiceImpl implements ClerkService {
         if (temp == null) {
             return StatusCode.CLERK_NOT_EXIST;
         }
-
+        if (temp.getAdmin() == 1) {
+            clerk.setAdmin(1);
+        }
         int result = clerkDao.updateClerk(clerk);
         if (result == 1) {
             return StatusCode.SUCCESS;
