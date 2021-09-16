@@ -3,6 +3,7 @@ package test.service;
 import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
 import com.hxuanyu.commodity.service.impl.ClerkServiceImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
+@Ignore
 public class TestClerkService {
     ClerkServiceImpl clerkService = new ClerkServiceImpl();
 

@@ -46,7 +46,7 @@ public class MsgUtil {
                 .append("_")
                 .append(clerkAdmin)
                 .append("_");
-        String md5 = Md5Encrypt.md5(clerkName + clerkPhone);
+        String md5 = CommonUtils.md5(clerkName + clerkPhone);
         sb.append(md5);
         return sb.toString();
     }

@@ -33,13 +33,13 @@ public class CommodityDaoImpl extends BaseDaoImpl implements CommodityDao {
     @Override
     public int addCommodity(Commodity commodity) {
         String sql = "insert into commodity(commodity_name, origin, production_date, shelf_life) values(?, ?, ?, ?)";
-        return update(sql, commodity.getCommodityName(), commodity.getOrigin(), commodity.getProductionDate(), commodity.getShelfLife());
+        return insert(sql, commodity.getCommodityName(), commodity.getOrigin(), commodity.getProductionDate(), commodity.getShelfLife());
     }
 
     @Override
     public int deleteCommodity(int id) {
         String sql = "delete from commodity where id = ?";
-        return update(sql, id);
+        return delete(sql, id);
     }
 
     @Override

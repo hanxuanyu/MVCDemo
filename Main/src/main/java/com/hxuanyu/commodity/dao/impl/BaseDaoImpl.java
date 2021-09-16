@@ -16,6 +16,38 @@ import java.util.List;
  */
 @SuppressWarnings("DuplicatedCode")
 public class BaseDaoImpl implements BaseDao {
+    @Override
+    public int insert(String sql, Object... args) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        try {
+            conn = JdbcUtils.getConnection();
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 0; i < args.length; i++) {
+                ps.setObject(i + 1, args[i]);
+            }
+            ps.executeUpdate();
+            resultSet = ps.getGeneratedKeys();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("GENERATED_KEY");
+                if (id != 0) {
+                    return id;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResource(conn, ps, resultSet);
+        }
+        return 0;
+    }
+
+    @Override
+    public int delete(String sql, Object... args) {
+        return update(sql, args);
+    }
+
     /**
      * description: 通用增删改操作
      *

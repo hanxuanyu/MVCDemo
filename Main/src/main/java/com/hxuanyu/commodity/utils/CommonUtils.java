@@ -3,25 +3,50 @@ package com.hxuanyu.commodity.utils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
- * MD5工具类
+ * 通用工具类
  *
  * @author hanxuanyu
  * @version 1.0
  */
-public class Md5Encrypt {
+public class CommonUtils {
     /**
      * Used building output as Hex
      */
-    private static final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6',
-            '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6',
+            '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+
+    public static Date getDateFromString(String dateString) {
+        return getDateFromString(dateString, "yyyy-MM-dd HH:mm:ss");
+    }
+
+
+    /**
+     * 通过日期字符串获取日期对象
+     *
+     * @param dateString 日期格式
+     * @param pattern    日期字符串
+     * @return 日期对象
+     */
+    public static Date getDateFromString(String dateString, String pattern) {
+        Date date = null;
+        try {
+            date = new SimpleDateFormat(pattern).parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 
     /**
      * 对字符串进行MD5加密
      *
      * @param text 明文
-     *
      * @return 密文
      */
     public static String md5(String text) {

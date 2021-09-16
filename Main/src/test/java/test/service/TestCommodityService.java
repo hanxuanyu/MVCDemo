@@ -4,6 +4,7 @@ import com.hxuanyu.commodity.beans.Commodity;
 import com.hxuanyu.commodity.dao.impl.CommodityDaoImpl;
 import com.hxuanyu.commodity.service.CommodityService;
 import com.hxuanyu.commodity.service.impl.CommodityServiceImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
+@Ignore
 public class TestCommodityService {
 
     CommodityService commodityService = new CommodityServiceImpl(new CommodityDaoImpl());

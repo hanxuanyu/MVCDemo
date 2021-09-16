@@ -7,6 +7,26 @@ import java.util.List;
  * @author hxuanyu
  */
 public interface BaseDao {
+
+    /**
+     * 增加操作
+     *
+     * @param sql  sql语句
+     * @param args 占位符参数
+     * @return 新增字段后自动生成的序列值
+     */
+    int insert(String sql, Object... args);
+
+    /**
+     * 删除语句
+     * @param sql sql
+     * @param args 占位符参数
+     * @return 受影响的行数
+     *
+     */
+    int delete(String sql, Object... args);
+
+
     /**
      * 通用增删改操作
      *

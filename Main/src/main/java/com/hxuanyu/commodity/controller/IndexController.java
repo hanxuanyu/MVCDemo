@@ -3,6 +3,7 @@ package com.hxuanyu.commodity.controller;
 import com.hxuanyu.commodity.beans.Msg;
 import com.hxuanyu.commodity.enums.StatusCode;
 import com.hxuanyu.commodity.service.ClerkService;
+import com.hxuanyu.commodity.utils.Constant;
 import com.hxuanyu.commodity.utils.MsgUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
@@ -54,5 +56,11 @@ public class IndexController {
         } else {
             return MsgUtil.errorMsg(statusCode.toString());
         }
+    }
+
+    @GetMapping("/logout")
+    public String logOut(HttpSession session) {
+        session.removeAttribute(Constant.SESSION_CLERK);
+        return "redirect:login";
     }
 }

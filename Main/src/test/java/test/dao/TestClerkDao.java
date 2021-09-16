@@ -4,6 +4,7 @@ import com.hxuanyu.commodity.beans.Clerk;
 import com.hxuanyu.commodity.dao.ClerkDao;
 import com.hxuanyu.commodity.dao.impl.ClerkDaoImpl;
 import com.hxuanyu.commodity.utils.JdbcUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
+@Ignore
 public class TestClerkDao {
 
     @Test

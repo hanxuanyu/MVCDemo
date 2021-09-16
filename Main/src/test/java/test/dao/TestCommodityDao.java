@@ -3,6 +3,7 @@ package test.dao;
 import com.hxuanyu.commodity.beans.Commodity;
 import com.hxuanyu.commodity.dao.CommodityDao;
 import com.hxuanyu.commodity.dao.impl.CommodityDaoImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
+@Ignore
 public class TestCommodityDao {
 
     CommodityDao commodityDao = new CommodityDaoImpl();

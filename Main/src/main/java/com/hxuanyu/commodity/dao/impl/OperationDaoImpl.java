@@ -17,19 +17,19 @@ import java.util.List;
 public class OperationDaoImpl extends BaseDaoImpl implements OperationDao {
     @Override
     public List<Operation> getAllOperation() {
-        String sql = "select id, user_id userId, commodity_id commodityId, operation_time operationTime, operation_type operationType from operation";
+        String sql = "select id, clerk_id clerkId, commodity_id commodityId, operation_time operationTime, operation_type operationType, clerk_name clerkName, commodity_name commodityName from operation";
         return getInstanceList(Operation.class, sql);
     }
 
     @Override
     public Operation getOperationById(int id) {
-        String sql = "select id, user_id userId, commodity_id commodityId, operation_time operationTime, operation_type operationType from operation where id = ?";
+        String sql = "select id, clerk_id clerkId, commodity_id commodityId, operation_time operationTime, operation_type operationType, clerk_name clerkName, commodity_name commodityName from operation where id = ?";
         return getInstance(Operation.class, sql, id);
     }
 
     @Override
     public int addOperation(Operation operation) {
-        String sql = "insert into operation(user_id, commodity_id, operation_time, operation_type) values (?, ?, ?, ?)";
-        return update(sql, operation.getUserId(), operation.getCommodityId(), operation.getOperationTime(), operation.getOperationType());
+        String sql = "insert into operation(clerk_id, commodity_id, operation_time, operation_type, clerk_name, commodity_name) values (?, ?, ?, ?, ?, ?)";
+        return update(sql, operation.getClerkId(), operation.getCommodityId(), operation.getOperationTime(), operation.getOperationType(), operation.getClerkName(), operation.getCommodityName());
     }
 }

@@ -24,10 +24,10 @@ public interface CommodityDao extends BaseDao {
     Commodity getCommodityById(int id);
 
     /**
-     * 增加店员
+     * 增加商品
      *
      * @param commodity 商品对象
-     * @return 受影响的行数
+     * @return 新增商品的id
      */
     int addCommodity(Commodity commodity);
 

@@ -6,84 +6,55 @@
     <meta name="author" content="hxuanyu">
     <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/static/css/materialdesignicons.min.css}" rel="stylesheet">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
+    <link th:href="@{/static/css/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{/static/css/jquery-confirm.min.css}" rel="stylesheet">
 </head>
 <body>
-<header class="navbar navbar-static-top bs-docs-nav" id="top">
-    <nav class="navbar navbar-default navbar-inverse">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Brand</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">商品列表</a></li>
-                    <li><a th:href="@{/clerkList}">用户列表</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a th:href="@{/}" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true"
-                           aria-expanded="false"><span
-                                th:text="${session.session_clerk.clerkName == null}?'请先登录':${session.session_clerk.clerkName}"></span><span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">退出登录</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</header>
+<div th:replace="~{common::header('商品列表')}"></div>
 <div class="container">
     <div class="row">
         <div role="main">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Panel heading</div>
+                <div class="panel-heading">商品列表</div>
                 <div class="panel-body">
-                    商品列表
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal-add">
+                        新增商品
+                    </button>
                 </div>
 
                 <!-- Table -->
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                        <th>商品编号</th>
+                        <th>品名</th>
+                        <th>产地</th>
+                        <th>生产日期</th>
+                        <th>保质期</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
+                    <tr th:each="commodity, index : ${commodityList}">
+                        <th scope="row" th:text="${commodity.getId()} "></th>
+                        <td th:text="${commodity.getCommodityName()}" th:id="${'com_name_' + commodity.getId()}"></td>
+                        <td th:text="${commodity.getOrigin()}" th:id="${'com_origin_' + commodity.getId()}"></td>
+                        <td th:text="${commodity.getProductionDate()}"
+                            th:id="${'com_production_date_' + commodity.getId()}"></td>
+                        <td th:text="${commodity.getShelfLife()}" th:id="${'com_shelf_life_' + commodity.getId()}"></td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="..." th:id="${commodity.getId()}">
+                                <button type="button"
+                                        class="btn btn-info btn-update-com" data-toggle="modal">修改
+                                </button>
+                                <button type="button"
+                                        class="btn btn-danger btn-delete-com">删除
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -92,9 +63,93 @@
     </div>
 </div>
 
+<!--添加商品模态框-->
+<div id="myModal-add" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     style="display: none; padding-right: 16px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel-1">新增商品</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form-add">
+                    <div class="form-group">
+                        <label for="commodity-name">品名</label>
+                        <input type="text" class="form-control" id="commodity-name" placeholder="品名">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-origin">产地</label>
+                        <input type="text" class="form-control" id="commodity-origin" placeholder="产地">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-production-date">生产日期</label>
+                        <input type="date" class="form-control" id="commodity-production-date" placeholder="生产日期">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-shelf-life">保质期</label>
+                        <input type="number" class="form-control" id="commodity-shelf-life" placeholder="保质期">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn-add-com" type="button" class="btn btn-primary">增加</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<!--修改商品模态框-->
+<div id="myModal-update" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     style="display: none; padding-right: 16px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel-2">修改商品</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form-update">
+                    <input type="hidden" id="commodity-id-update">
+                    <div class="form-group">
+                        <label for="commodity-name-update">品名</label>
+                        <input type="text" class="form-control " id="commodity-name-update" placeholder="品名">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-origin-update">产地</label>
+                        <input type="text" class="form-control " id="commodity-origin-update" placeholder="产地">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-production-date-update">生产日期</label>
+                        <input type="date" class="form-control c" id="commodity-production-date-update"
+                               placeholder="生产日期">
+                    </div>
+                    <div class="form-group">
+                        <label for="commodity-shelf-life-update">保质期</label>
+                        <input type="number" class="form-control " id="commodity-shelf-life-update" placeholder="保质期">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="btn-update-com" type="button" class="btn btn-primary">更新</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 <!--脚本文件-->
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/toastr.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jquery-confirm.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/perfect-scrollbar.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/common/common.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/commodity/commodity.js}"></script>
 </body>
 </html>

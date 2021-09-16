@@ -4,6 +4,7 @@ import com.hxuanyu.commodity.beans.Operation;
 import com.hxuanyu.commodity.dao.OperationDao;
 import com.hxuanyu.commodity.dao.impl.OperationDaoImpl;
 import com.hxuanyu.commodity.enums.OperationType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author hanxuanyu
  * @version 1.0
  */
+@Ignore
 public class TestOperationDao {
 
     OperationDao operationDao = new OperationDaoImpl();
@@ -39,7 +41,9 @@ public class TestOperationDao {
                 1,
                 2,
                 new Date(System.currentTimeMillis()),
-                OperationType.ADD_COMMODITY
+                OperationType.ADD_COMMODITY.value(),
+                "test",
+                "test"
         ));
         System.out.println(result);
     }

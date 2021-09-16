@@ -1,7 +1,5 @@
 package com.hxuanyu.commodity.beans;
 
-import com.hxuanyu.commodity.enums.OperationType;
-
 import java.util.Date;
 
 /**
@@ -12,34 +10,35 @@ import java.util.Date;
  */
 public class Operation {
     private int id;
-    private int userId;
+    private int clerkId;
     private int commodityId;
     private Date operationTime;
     private int operationType;
+    private String clerkName;
+    private String commodityName;
 
     public Operation() {
-
     }
 
-    public Operation(int userId, int commodityId, OperationType operationType) {
-        this.userId = userId;
+    public Operation(int clerkId, int commodityId, Date operationTime, int operationType, String clerkName, String commodityName) {
+        this.clerkId = clerkId;
         this.commodityId = commodityId;
-        this.operationType = operationType.value();
-    }
-
-    public Operation(int userId, int commodityId, Date operationTime, OperationType operationType) {
-        this(userId, commodityId, operationType);
         this.operationTime = operationTime;
+        this.operationType = operationType;
+        this.clerkName = clerkName;
+        this.commodityName = commodityName;
     }
 
     @Override
     public String toString() {
         return "Operation{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", clerkId=" + clerkId +
                 ", commodityId=" + commodityId +
                 ", operationTime=" + operationTime +
                 ", operationType=" + operationType +
+                ", clerkName='" + clerkName + '\'' +
+                ", commodityName='" + commodityName + '\'' +
                 '}';
     }
 
@@ -51,12 +50,12 @@ public class Operation {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getClerkId() {
+        return clerkId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setClerkId(int clerkId) {
+        this.clerkId = clerkId;
     }
 
     public int getCommodityId() {
@@ -81,5 +80,21 @@ public class Operation {
 
     public void setOperationType(int operationType) {
         this.operationType = operationType;
+    }
+
+    public String getClerkName() {
+        return clerkName;
+    }
+
+    public void setClerkName(String clerkName) {
+        this.clerkName = clerkName;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
     }
 }
