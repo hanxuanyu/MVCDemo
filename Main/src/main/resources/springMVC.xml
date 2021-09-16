@@ -40,6 +40,11 @@
             <mvc:exclude-mapping path="/static/js/**"/>
             <ref bean="loginInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/operation/**"/>
+            <ref bean="adminInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
     <!--自定义json转换器-->
     <mvc:annotation-driven>
