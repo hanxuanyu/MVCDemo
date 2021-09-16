@@ -30,9 +30,9 @@ CREATE TABLE `operation`
 (
     `id`             INT(10) PRIMARY KEY AUTO_INCREMENT,
     `clerk_id`       INT(10) NOT NULL,
-    `clerk_name`     INT(10) NOT NULL,
+    `clerk_name`     VARCHAR(10) NOT NULL,
     `commodity_id`   INT(10) NOT NULL,
-    `commodity_name` INT(10) NOT NULL,
+    `commodity_name` VARCHAR(10) NOT NULL,
     `operation_time` DATETIME DEFAULT '2021-01-01 00:00:00',
     `operation_type` INT(1)   DEFAULT 0
 );
